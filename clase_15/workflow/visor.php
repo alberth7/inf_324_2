@@ -1,11 +1,21 @@
 <?php
+$host_db = "localhost";
+$user_db = "usuario";
+$pwd_db = "123456";
+$name_db = "workflow";
+
+$link = mysqli_connect($host_db, $user_db, $pwd_db, $name_db);
+
 $flujo=$_GET["flujo"];
 $proceso=$_GET["proceso"];
-$link =mysql_connect("localhost","usuario","123456");
-mysql_select_db("workflow");
-$resultado=mysql_query("select * from secuencia where  Cod_flujo='".$flujo."' and Cod_proceso='".$proceso."'");
-$datos=mysql_fetch_array($resultado);
+
+$sql="select * from secuencia where  Cod_flujo='$flujo' and Cod_proceso='$proceso'";
+
+$resultado=mysqli_query($link,$sql);
+$datos=mysqli_fetch_array($resultado);
+print_r($datos);	
 $form=$datos["Form"];
+echo "..................".$form;
 include "v".$form;
 ?>
 <html>
